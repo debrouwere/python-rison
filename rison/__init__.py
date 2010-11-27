@@ -250,5 +250,5 @@ class Parser(object):
         '(': parse_array
         }
 
-def loads(s):
-    return Parser().parse(s)
+def loads(s, format=str):
+    return Parser().parse(s, format=str)
