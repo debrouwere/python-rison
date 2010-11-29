@@ -41,18 +41,18 @@ class Parser(object):
         return self.parse(str)
 
     """
-    This parser supports RISON, RISON-A and RISON-O.
+    This parser supports RISON, A-RISON and O-RISON.
     """
     def parse(self, string, format=str):
         if format in [list, 'A']:
             self.string = "!({0})".format(string)
-        elif format is [dict, 'O']:
+        elif format in [dict, 'O']:
             self.string = "({0})".format(string)
         elif format is str:
             self.string = string
         else:
             raise ValueError("""Parse format should be one of str, list, dict, 
-                'A' (alias for list), '0' (alias for dict).""")
+                'A' (alias for list), 'O' (alias for dict). Got {0} instead""".format(format))
         
         self.index = 0
 
@@ -251,4 +251,4 @@ class Parser(object):
         }
 
 def loads(s, format=str):
-    return Parser().parse(s, format=str)
+    return Parser().parse(s, format=format)
