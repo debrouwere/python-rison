@@ -39,7 +39,7 @@ class Parser(object):
     def parse(self, string, format=str):
         if format in [list, 'A']:
             self.string = "!({0})".format(string)
-        elif format is [dict, 'O']:
+        elif format in [dict, 'O']:
             self.string = "({0})".format(string)
         elif format is str:
             self.string = string
@@ -51,7 +51,7 @@ class Parser(object):
 
         value = self.readValue()
         if self.next():
-            raise ParserException("unable to parse rison string %r" % (str,))
+            raise ParserException("unable to parse rison string %r" % (string,))
         return value
     
     def readValue(self):
@@ -244,4 +244,4 @@ class Parser(object):
         }
 
 def loads(s, format=str):
-    return Parser().parse(s, format=str)
+    return Parser().parse(s, format=format)
